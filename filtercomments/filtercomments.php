@@ -86,13 +86,25 @@ function xs_filterComments_from_list($comments){
      $options = get_option( 'xs__settings' );
      $chracter = "*";
      $new_comments="";
-     if(isset($options['xs_filterComments_text'])){
+     if(isset($options['xs_filterComments_text']) AND !empty(trim($options['xs_filterComments_text'])) ) {
              $bad_words = explode("|", trim($options['xs_filterComments_text']));             
      }else{
-        $bad_words ="";
+        $bad_words = "";
+         $new_comments = $comments;
      }
-     $new_comments = str_ireplace($bad_words, str_repeat($chracter, 3), $comments);
+
+     if(is_array($bad_words)){
+
+       foreach ($bad_words as $key => $value) {
+                $length = strlen($value);
+                $new_comments = str_ireplace($bad_words, str_repeat($chracter, $length), $comments);
+
+        }
+     }
      return $new_comments;
+}
+function _repeat_chracters($str){
+    return str_repeat('*', strlen($str));
 }
 add_filter('comment_text', 'xs_filterComments_from_list');
 ?>
