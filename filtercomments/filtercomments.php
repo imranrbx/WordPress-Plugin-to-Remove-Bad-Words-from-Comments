@@ -36,11 +36,13 @@ function xs__settings_init(  ) {
 
 
 }
-
-
 function xs_filterComments_text_render(  ) { 
 
     $options = get_option( 'xs__settings' );
+    $placeholder ="";
+    if(isset($options['xs_filterComments_text']) and empty(trim($options['xs_filterComments_text']))){
+        $placeholder = "sex|fuck";
+    }
     ?>
     <style>
      div#filter_wrap{
@@ -51,7 +53,7 @@ function xs_filterComments_text_render(  ) {
         }
     </style>
     <div id="filter_wrap">
-     <input type="text" class="badword_filter" name='xs__settings[xs_filterComments_text]' value="<?php if(isset($options['xs_filterComments_text'])) echo $options['xs_filterComments_text']; ?>"> 
+     <input type="text" class="badword_filter" name='xs__settings[xs_filterComments_text]' placeholder="<?php echo $placeholder; ?>" value="<?php if(isset($options['xs_filterComments_text'])) echo $options['xs_filterComments_text']; ?>"> 
     </div>
     <?php
 
