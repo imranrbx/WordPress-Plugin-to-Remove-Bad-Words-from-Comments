@@ -103,8 +103,5 @@ function xs_filterComments_from_list($comments){
      }
      return $new_comments;
 }
-function _repeat_chracters($str){
-    return str_repeat('*', strlen($str));
-}
 add_filter('comment_text', 'xs_filterComments_from_list');
 ?>
